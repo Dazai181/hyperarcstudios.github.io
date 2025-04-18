@@ -1,98 +1,922 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NovaForge Studios</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HyperArc Studios | Crafting Worlds, One Pixel at a Time</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+        
+        :root {
+            --background: #0d1117;
+            --darker: #090c10;
+            --card-bg: #161b22;
+            --text: #e6edf3;
+            --accent-blue: #58a6ff;
+            --accent-violet: #bc52ee;
+            --accent-orange: #ff7b37;
+            --glow-blue: 0 0 10px #58a6ff, 0 0 20px rgba(88, 166, 255, 0.5);
+            --glow-violet: 0 0 10px #bc52ee, 0 0 20px rgba(188, 82, 238, 0.5);
+            --glow-orange: 0 0 10px #ff7b37, 0 0 20px rgba(255, 123, 55, 0.5);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 0.05em;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: transparent;
+            border: 2px solid var(--accent-blue);
+            color: var(--text);
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            z-index: 1;
+            border-radius: 4px;
+        }
+        
+        .btn:hover {
+            box-shadow: var(--glow-blue);
+            transform: translateY(-2px);
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background-color: var(--accent-blue);
+            z-index: -1;
+            transition: width 0.3s ease;
+        }
+        
+        .btn:hover::before {
+            width: 100%;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(13, 17, 23, 0.9);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: var(--accent-blue);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-blue);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent-blue);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text);
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(13, 17, 23, 0.9), rgba(9, 12, 16, 0.95));
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('/api/placeholder/1200/800') center/cover no-repeat;
+            z-index: -1;
+            opacity: 0.2;
+        }
+        
+        .hero-content {
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .hero h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--accent-blue);
+            box-shadow: var(--glow-blue);
+        }
+        
+        .hero-tagline {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--text);
+            opacity: 0.9;
+        }
+        
+        .hero-btn {
+            margin-top: 2rem;
+        }
+        
+        /* Grid Background Animation */
+        .grid-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(88, 166, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(88, 166, 255, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+            animation: grid-move 20s linear infinite;
+        }
+        
+        @keyframes grid-move {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(40px);
+            }
+        }
+        
+        /* About Section */
+        section {
+            padding: 6rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--accent-violet);
+            box-shadow: var(--glow-violet);
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .about-text {
+            padding: 2rem;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+            border-left: 3px solid var(--accent-violet);
+        }
+        
+        .about-text h3 {
+            margin-bottom: 1rem;
+            color: var(--accent-violet);
+        }
+        
+        .about-image {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Games Section */
+        .games {
+            background-color: var(--darker);
+        }
+        
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .game-card {
+            position: relative;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+            transition: all 0.3s ease;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+        
+        .game-card:nth-child(1) {
+            border-top: 3px solid var(--accent-blue);
+        }
+        
+        .game-card:nth-child(2) {
+            border-top: 3px solid var(--accent-violet);
+        }
+        
+        .game-card:nth-child(3) {
+            border-top: 3px solid var(--accent-orange);
+        }
+        
+        .game-image {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .game-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .game-card:hover .game-image img {
+            transform: scale(1.1);
+        }
+        
+        .game-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(22, 27, 34, 0.9), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .game-card:hover .game-overlay {
+            opacity: 1;
+        }
+        
+        .game-overlay-btn {
+            padding: 0.5rem 1.5rem;
+            background-color: rgba(88, 166, 255, 0.2);
+            border: 1px solid var(--accent-blue);
+            color: var(--text);
+            border-radius: 4px;
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+        }
+        
+        .game-overlay-btn:hover {
+            background-color: var(--accent-blue);
+            box-shadow: var(--glow-blue);
+        }
+        
+        .game-content {
+            padding: 1.5rem;
+        }
+        
+        .game-title {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .game-desc {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+        
+        /* Blog Section */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .blog-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+            transition: all 0.3s ease;
+            border-left: 3px solid var(--accent-orange);
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        
+        .blog-content {
+            padding: 1.5rem;
+        }
+        
+        .blog-date {
+            font-size: 0.8rem;
+            color: var(--accent-orange);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .blog-title {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .blog-excerpt {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        
+        .blog-link {
+            color: var(--accent-orange);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .blog-link:hover {
+            text-shadow: var(--glow-orange);
+        }
+        
+        .blog-link i {
+            margin-left: 0.3rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .blog-link:hover i {
+            transform: translateX(5px);
+        }
+        
+        /* Contact Section */
+        .contact {
+            background-color: var(--darker);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 30%, rgba(88, 166, 255, 0.05) 0%, transparent 30%),
+                radial-gradient(circle at 90% 70%, rgba(188, 82, 238, 0.05) 0%, transparent 30%);
+            z-index: 0;
+        }
+        
+        .contact-container {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        
+        .contact-info {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+        }
+        
+        .contact-info h3 {
+            margin-bottom: 1.5rem;
+            color: var(--accent-blue);
+        }
+        
+        .contact-info p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-methods {
+            list-style: none;
+        }
+        
+        .contact-methods li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-methods i {
+            color: var(--accent-blue);
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .social-links {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--background);
+            border-radius: 50%;
+            color: var(--text);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--glow-blue);
+            color: var(--accent-blue);
+        }
+        
+        .contact-form {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+        }
+        
+        .contact-form h3 {
+            margin-bottom: 1.5rem;
+            color: var(--accent-violet);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: var(--background);
+            border: 1px solid rgba(230, 237, 243, 0.1);
+            border-radius: 4px;
+            color: var(--text);
+            font-family: 'Rajdhani', sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-violet);
+            box-shadow: 0 0 0 2px rgba(188, 82, 238, 0.2);
+        }
+        
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .submit-btn {
+            border-color: var(--accent-violet);
+            width: 100%;
+        }
+        
+        .submit-btn:hover {
+            box-shadow: var(--glow-violet);
+        }
+        
+        .submit-btn::before {
+            background-color: var(--accent-violet);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--background);
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            border-top: 1px solid rgba(230, 237, 243, 0.1);
+        }
+        
+        .footer-logo {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+        
+        .footer-logo span {
+            color: var(--accent-blue);
+        }
+        
+        .footer-text {
+            opacity: 0.7;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-links a {
+            color: var(--text);
+            text-decoration: none;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-blue);
+            opacity: 1;
+        }
+        
+        .copyright {
+            opacity: 0.5;
+            font-size: 0.8rem;
+        }
+        
+        /* Animated Accent Line */
+        .accent-line {
+            position: absolute;
+            height: 1px;
+            width: 100%;
+            background: linear-gradient(
+                90deg, 
+                transparent 0%, 
+                var(--accent-blue) 25%, 
+                var(--accent-violet) 50%, 
+                var(--accent-orange) 75%, 
+                transparent 100%
+            );
+            animation: line-move 4s linear infinite;
+        }
+        
+        @keyframes line-move {
+            0% {
+                background-position: 0% 0%;
+            }
+            100% {
+                background-position: 100% 0%;
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: rgba(13, 17, 23, 0.95);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+                transition: clip-path 0.4s ease;
+            }
+            
+            .nav-links.active {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+            
+            .nav-links li {
+                margin: 1rem 0;
+            }
+            
+            .menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-tagline {
+                font-size: 1.2rem;
+            }
+            
+            .about-content,
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .games-grid,
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-tagline {
+                font-size: 1rem;
+            }
+            
+            section {
+                padding: 4rem 0;
+            }
+        }
+    </style>
 </head>
-<body class="bg-gray-900 text-white font-sans">
-  <!-- Hero Section -->
-  <section class="h-screen bg-cover bg-center flex items-center justify-center" style="background-image: url('https://images.unsplash.com/photo-1590608897129-79da98d1593d');">
-    <div class="bg-black bg-opacity-60 p-10 rounded-xl text-center">
-      <h1 class="text-5xl font-bold mb-4">NovaForge Studios</h1>
-      <p class="text-lg mb-6">Forging Worlds Beyond Imagination</p>
-      <a href="#games" class="bg-indigo-600 hover:bg-indigo-700 px-6 py-3 rounded-full text-white transition">Explore Our Games</a>
-    </div>
-  </section>
-
-  <!-- About -->
-  <section id="about" class="py-20 px-6 max-w-5xl mx-auto">
-    <h2 class="text-4xl font-bold mb-6 text-center">About Us</h2>
-    <p class="text-lg text-gray-300 text-center max-w-3xl mx-auto">
-      NovaForge Studios is an indie game development team driven by a passion for storytelling, mechanics, and immersive worlds. We craft unique gaming experiences that challenge players and stir emotions.
-    </p>
-  </section>
-
-  <!-- Games -->
-  <section id="games" class="py-20 bg-gray-800 px-6">
-    <h2 class="text-4xl font-bold text-center mb-12">Our Games</h2>
-    <div class="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
-      <!-- Game Card -->
-      <div class="bg-gray-700 rounded-xl overflow-hidden shadow-lg">
-        <img src="https://images.unsplash.com/photo-1601758123927-196b0a1c9399" alt="Game" class="w-full h-48 object-cover">
-        <div class="p-6">
-          <h3 class="text-xl font-bold mb-2">Echoes of Aether</h3>
-          <p class="text-gray-300">A fantasy action RPG where elemental magic shapes your journey. Discover secrets and forge your path.</p>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <a href="#" class="logo">Hyper<span>Arc</span> Studios</a>
+            <button class="menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#games">Games</a></li>
+                <li><a href="#blog">Dev Blog</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
         </div>
-      </div>
+    </nav>
 
-      <!-- Game Card -->
-      <div class="bg-gray-700 rounded-xl overflow-hidden shadow-lg">
-        <img src="https://images.unsplash.com/photo-1622810813806-e33f6b4b0c34" alt="Game" class="w-full h-48 object-cover">
-        <div class="p-6">
-          <h3 class="text-xl font-bold mb-2">Neon Drift</h3>
-          <p class="text-gray-300">An adrenaline-fueled cyber-racer through neon-lit cities. High-speed thrills and tactical racing.</p>
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="grid-bg"></div>
+        <div class="container hero-content">
+            <h1>Hyper<span style="color: var(--accent-blue);">Arc</span> Studios</h1>
+            <p class="hero-tagline">Crafting Worlds, One Pixel at a Time</p>
+            <a href="#games" class="btn hero-btn">See Our Games</a>
         </div>
-      </div>
+    </section>
 
-      <!-- Game Card -->
-      <div class="bg-gray-700 rounded-xl overflow-hidden shadow-lg">
-        <img src="https://images.unsplash.com/photo-1611162617213-9e5e2879c252" alt="Game" class="w-full h-48 object-cover">
-        <div class="p-6">
-          <h3 class="text-xl font-bold mb-2">Iron Pulse</h3>
-          <p class="text-gray-300">A tactical mech battler set in a post-war future. Customize, deploy, and dominate the battlefield.</p>
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About Us</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Our Vision</h3>
+                    <p>HyperArc Studios is an independent game development team passionate about creating innovative, immersive, and meaningful gaming experiences. Founded in 2021 by a group of industry veterans, we focus on pushing creative boundaries and technical excellence.</p>
+                    <p>Our approach combines cutting-edge technology with artistic vision to craft games that resonate with players on an emotional level. Whether it's exploring vast open worlds or solving intricate puzzles, our games aim to captivate, challenge, and inspire.</p>
+                    <p>At HyperArc, we believe that games are more than entertainment—they're transformative experiences that can change how we see the world.</p>
+                </div>
+                <div class="about-image">
+                    <img src="/api/placeholder/600/400" alt="HyperArc Studios Team">
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Team -->
-  <section id="team" class="py-20 px-6 max-w-5xl mx-auto">
-    <h2 class="text-4xl font-bold text-center mb-10">Meet the Team</h2>
-    <div class="grid md:grid-cols-3 gap-8 text-center">
-      <div>
-        <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-28 h-28 rounded-full mx-auto mb-4" />
-        <h4 class="text-xl font-semibold">Alex Mercer</h4>
-        <p class="text-gray-400">Creative Director</p>
-      </div>
-      <div>
-        <img src="https://randomuser.me/api/portraits/women/44.jpg" class="w-28 h-28 rounded-full mx-auto mb-4" />
-        <h4 class="text-xl font-semibold">Jamie Lee</h4>
-        <p class="text-gray-400">Lead Developer</p>
-      </div>
-      <div>
-        <img src="https://randomuser.me/api/portraits/men/45.jpg" class="w-28 h-28 rounded-full mx-auto mb-4" />
-        <h4 class="text-xl font-semibold">Sam Rivera</h4>
-        <p class="text-gray-400">Art Director</p>
-      </div>
-    </div>
-  </section>
+    <!-- Games Section -->
+    <section id="games" class="games">
+        <div class="container">
+            <h2 class="section-title">Our Games</h2>
+            <div class="games-grid">
+                <div class="game-card">
+                    <div class="game-image">
+                        <img src="/api/placeholder/400/200" alt="Dextorm">
+                        <div class="game-overlay">
+                            <button class="game-overlay-btn">Play Now</button>
+                        </div>
+                    </div>
+                    <div class="game-content">
+                        <h3 class="game-title">Dextorm</h3>
+                        <p class="game-desc">An Strategy Card battle game with deep lore and 4 different multi verses</p>
+                        <div class="game-info">
+                            <span>Strategy Card Game</span>
+                            <span>In Development</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <div class="game-image">
+                        <img src="/Users/My Asus/Desktop/web site/Tengri.jpg" alt="Tengri">
+                        <div class="game-overlay">
+                            <button class="game-overlay-btn">Play Now</button>
+                        </div>
+                    </div>
+                    <div class="game-content">
+                        <h3 class="game-title">Tengri</h3>
+                        <p class="game-desc">Strategy board game with some card battle elements and </p>
+                        <div class="game-info">
+                            <span>Puzzle</span>
+                            <span>In Development</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <div class="game-image">
+                        <img src="/api/placeholder/400/200" alt="Coming soon">
+                        <div class="game-overlay">
+                            <button class="game-overlay-btn">Learn More</button>
+                        </div>
+                    </div>
+                    <div class="game-content">
+                        <h3 class="game-title">Coming Soon</h3>
+                        <p class="game-desc">Explore a vast universe in this space exploration strategy game with procedural generation.</p>
+                        <div class="game-info">
+                            <span>Fps Simulation</span>
+                            <span>In Concept phase</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <!-- Contact -->
-  <section id="contact" class="py-16 bg-gray-800 px-6">
-    <h2 class="text-4xl font-bold text-center mb-8">Contact Us</h2>
-    <form class="max-w-2xl mx-auto space-y-6">
-      <input type="text" placeholder="Your Name" class="w-full p-4 rounded bg-gray-700 text-white border border-gray-600" />
-      <input type="email" placeholder="Your Email" class="w-full p-4 rounded bg-gray-700 text-white border border-gray-600" />
-      <textarea placeholder="Your Message" rows="4" class="w-full p-4 rounded bg-gray-700 text-white border border-gray-600"></textarea>
-      <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 p-4 rounded text-white font-semibold">Send Message</button>
-    </form>
-  </section>
+    <!-- Blog Section -->
+    <section id="blog" class="blog">
+        <div class="container">
+            <h2 class="section-title">Dev Blog</h2>
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <div class="blog-content">
+                        <div class="blog-date">April 15, 2025</div>
+                        <h3 class="blog-title">Behind the Scenes: Creating Neon Horizon's Dynamic World</h3>
+                        <p class="blog-excerpt">Dive into our development process and discover how we built the living, breathing city of New Meridian in our latest title.</p>
+                        <a href="#" class="blog-link">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-content">
+                        <div class="blog-date">March 28, 2025</div>
+                        <h3 class="blog-title">AI Companions: The Future of NPC Interaction</h3>
+                        <p class="blog-excerpt">Learn about our innovative approach to creating realistic, adaptive AI characters that evolve based on player interactions.</p>
+                        <a href="#" class="blog-link">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-content">
+                        <div class="blog-date">February 10, 2025</div>
+                        <h3 class="blog-title">Quantum Drift: Developer Diary #3</h3>
+                        <p class="blog-excerpt">The latest update on our upcoming puzzle game, including new gameplay mechanics and visual effects showcases.</p>
+                        <a href="#" class="blog-link">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <!-- Footer -->
-  <footer class="text-center text-gray-500 py-6 bg-gray-900 border-t border-gray-700">
-    &copy; 2025 NovaForge Studios. All rights reserved.
-  </footer>
-</body>
-</html>
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Get in Touch</h3>
+                    <p>Have questions about our games or interested in collaborating? Reach out to us—we'd love to hear from you!</p>
+                    <ul class="contact-methods">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>123 Game Dev Street, Digital City</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>info@hyperarcstudios.com</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>+1 (555) 123-4567
