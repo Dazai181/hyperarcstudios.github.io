@@ -1,11 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NovaForge Studios</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-    Hello world!
+<body class="bg-gray-900 text-white font-sans">
+  <!-- Hero Section -->
+  <section class="h-screen bg-cover bg-center flex items-center justify-center" style="background-image: url('https://images.unsplash.com/photo-1590608897129-79da98d1593d');">
+    <div class="bg-black bg-opacity-60 p-10 rounded-xl text-center">
+      <h1 class="text-5xl font-bold mb-4">NovaForge Studios</h1>
+      <p class="text-lg mb-6">Forging Worlds Beyond Imagination</p>
+      <a href="#games" class="bg-indigo-600 hover:bg-indigo-700 px-6 py-3 rounded-full text-white transition">Explore Our Games</a>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="py-20 px-6 max-w-5xl mx-auto">
+    <h2 class="text-4xl font-bold mb-6 text-center">About Us</h2>
+    <p class="text-lg text-gray-300 text-center max-w-3xl mx-auto">
+      NovaForge Studios is an indie game development team driven by a passion for storytelling, mechanics, and immersive worlds. We craft unique gaming experiences that challenge players and stir emotions.
+    </p>
+  </section>
+
+  <!-- Games -->
+  <section id="games" class="py-20 bg-gray-800 px-6">
+    <h2 class="text-4xl font-bold text-center mb-12">Our Games</h2>
+    <div class="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+      <!-- Game Card -->
+      <div class="bg-gray-700 rounded-xl overflow-hidden shadow-lg">
+        <img src="https://images.unsplash.com/photo-1601758123927-196b0a1c9399" alt="Game" class="w-full h-48 object-cover">
+        <div class="p-6">
+          <h3 class="text-xl font-bold mb-2">Echoes of Aether</h3>
+          <p class="text-gray-300">A fantasy action RPG where elemental magic shapes your journey. Discover secrets and forge your path.</p>
+        </div>
+      </div>
+
+      <!-- Game Card -->
+      <div class="bg-gray-700 rounded-xl overflow-hidden shadow-lg">
+        <img src="https://images.unsplash.com/photo-1622810813806-e33f6b4b0c34" alt="Game" class="w-full h-48 object-cover">
+        <div class="p-6">
+          <h3 class="text-xl font-bold mb-2">Neon Drift</h3>
+          <p class="text-gray-300">An adrenaline-fueled cyber-racer through neon-lit cities. High-speed thrills and tactical racing.</p>
+        </div>
+      </div>
+
+      <!-- Game Card -->
+      <div class="bg-gray-700 rounded-xl overflow-hidden shadow-lg">
+        <img src="https://images.unsplash.com/photo-1611162617213-9e5e2879c252" alt="Game" class="w-full h-48 object-cover">
+        <div class="p-6">
+          <h3 class="text-xl font-bold mb-2">Iron Pulse</h3>
+          <p class="text-gray-300">A tactical mech battler set in a post-war future. Customize, deploy, and dominate the battlefield.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section id="team" class="py-20 px-6 max-w-5xl mx-auto">
+    <h2 class="text-4xl font-bold text-center mb-10">Meet the Team</h2>
+    <div class="grid md:grid-cols-3 gap-8 text-center">
+      <div>
+        <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-28 h-28 rounded-full mx-auto mb-4" />
+        <h4 class="text-xl font-semibold">Alex Mercer</h4>
+        <p class="text-gray-400">Creative Director</p>
+      </div>
+      <div>
+        <img src="https://randomuser.me/api/portraits/women/44.jpg" class="w-28 h-28 rounded-full mx-auto mb-4" />
+        <h4 class="text-xl font-semibold">Jamie Lee</h4>
+        <p class="text-gray-400">Lead Developer</p>
+      </div>
+      <div>
+        <img src="https://randomuser.me/api/portraits/men/45.jpg" class="w-28 h-28 rounded-full mx-auto mb-4" />
+        <h4 class="text-xl font-semibold">Sam Rivera</h4>
+        <p class="text-gray-400">Art Director</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-16 bg-gray-800 px-6">
+    <h2 class="text-4xl font-bold text-center mb-8">Contact Us</h2>
+    <form class="max-w-2xl mx-auto space-y-6">
+      <input type="text" placeholder="Your Name" class="w-full p-4 rounded bg-gray-700 text-white border border-gray-600" />
+      <input type="email" placeholder="Your Email" class="w-full p-4 rounded bg-gray-700 text-white border border-gray-600" />
+      <textarea placeholder="Your Message" rows="4" class="w-full p-4 rounded bg-gray-700 text-white border border-gray-600"></textarea>
+      <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 p-4 rounded text-white font-semibold">Send Message</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center text-gray-500 py-6 bg-gray-900 border-t border-gray-700">
+    &copy; 2025 NovaForge Studios. All rights reserved.
+  </footer>
 </body>
 </html>
